@@ -2,7 +2,7 @@
 
 A powerful tool to generate beautifully formatted PDF code templates for competitive programming contests (ICPC, etc.). Converts your library of algorithms and data structures into a professional, multi-column reference document.
 
-## ✨ Features
+## Features
 
 - **Automatic PDF Generation** - Converts your code library into a formatted PDF
 - **Cross-Platform** - Works on Linux, macOS, and Windows
@@ -17,7 +17,7 @@ A powerful tool to generate beautifully formatted PDF code templates for competi
 - **Customizable** - Support for custom fonts, equations, and notes
 - **Modular Codebase** - Clean, maintainable Python code
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 cp-code-template/
@@ -52,7 +52,7 @@ cp-code-template/
 └── run.bat                       # Windows build script
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -159,7 +159,7 @@ The script will:
 3. Compile the PDF
 4. Output the final PDF to `output/main.pdf`
 
-## 🎯 Quick Demo
+## Quick Demo
 
 Want to see it in action? Use the demo scripts:
 
@@ -185,7 +185,7 @@ The demo creates sample code for:
 
 This gives you a complete example to see the formatting and structure.
 
-## �� Organizing Your Library
+## Organizing Your Library
 
 Create your library in the `library/` directory with this structure:
 
@@ -282,7 +282,7 @@ LANGUAGE_DISPLAY_NAMES = {
 }
 ```
 
-## 📄 Output
+## Output
 
 The generated PDF includes:
 
