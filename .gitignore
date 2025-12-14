@@ -1,0 +1,47 @@
+# Output directory (generated PDF)
+output/
+
+# Generated LaTeX files in templates
+templates/content.tex
+templates/team_info.tex
+
+# LaTeX auxiliary files (in case they're generated in root)
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.xdv
+_minted-*/
+_minted/
+/main.tex
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+
+# OS-specific
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Project files
+project_spec.md
+PROJECT_SUMMARY.md
+
+# Fonts (user can add their own)
+fonts/
+
+# User library (optional - remove this line if you want to track your library)
+# library/
