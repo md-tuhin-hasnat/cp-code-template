@@ -1,0 +1,18 @@
+\textbf{Note:} The \texttt{-DLOCAL} flag allows conditional debugging:
+
+\begin{verbatim}
+#ifdef LOCAL
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+\end{verbatim}
+
+This ensures file I/O only works locally, not on online judges.
+
+\textbf{Pro Tips:}
+\begin{itemize}
+\item Keep \texttt{input.txt} in same folder as your code
+\item Use Debug Build variant for catching runtime errors
+\item \texttt{-fsanitize} flags help find memory issues
+\item Comment out \texttt{freopen} for online submission
+\end{itemize}
