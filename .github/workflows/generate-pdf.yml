@@ -1,0 +1,86 @@
+name: Generate PDF
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'library/**'
+      - 'templates/**'
+      - 'src/**'
+      - '.github/workflows/generate-pdf.yml'
+
+jobs:
+  generate-pdf:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      
+      - name: Install LaTeX dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-extra
+      
+      - name: Install Pygments
+        run: pip install pygments
+      
+      - name: Generate content.tex
+        run: |
+          # Use default values for automated generation
+          echo "" | python3 src/main.py || true
+          # If the above fails, create a simple script to inject defaults
+          if [ ! -f templates/content.tex ]; then
+            python3 -c "
+import sys
+sys.path.insert(0, 'src')
+from content_generator import generate_content
+from team_info import get_team_info, save_team_info
+
+# Use default team info for automated builds
+team_info = {
+    'contest_title': 'ICPC World Finals',
+    'team_name': 'Team Name',
+    'members': ['Member 1', 'Member 2', 'Member 3']
+}
+save_team_info(team_info)
+generate_content('library', 'templates/content.tex')
+"
+          fi
+      
+      - name: Compile PDF
+        run: |
+          cp templates/main.tex .
+          xelatex -shell-escape -interaction=nonstopmode -output-directory=output main.tex
+          xelatex -shell-escape -interaction=nonstopmode -output-directory=output main.tex
+      
+      - name: Clean up auxiliary files
+        run: |
+          rm -f main.aux main.log main.out main.toc main.tex
+          find output -type f ! -name '*.pdf' ! -name '*.tex' -delete 2>/dev/null || true
+      
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cp-template-pdf
+          path: output/main.pdf
+          retention-days: 90
+      
+      - name: Commit generated PDF (optional)
+        if: success()
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add output/main.pdf templates/content.tex templates/team_info.tex 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "🤖 Auto-generate PDF [skip ci]"
+          git push || echo "No changes to push"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
