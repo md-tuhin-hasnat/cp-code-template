@@ -1,0 +1,9 @@
+2D Prefix Sum for efficient rectangle range sum queries.
+
+\textbf{Time Complexity:}
+\begin{itemize}
+\item Build: $O(R \times C)$
+\item Query: $O(1)$
+\end{itemize}
+
+\textbf{Formula:} \texttt{sum = px[i2][j2] - px[i2][j1-1] - px[i1-1][j2] + px[i1-1][j1-1]}

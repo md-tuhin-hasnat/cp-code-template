@@ -1,0 +1,25 @@
+Disjoint Set Union (DSU) data structure with union by rank and path compression. Efficiently manages dynamic connectivity queries.
+
+\textbf{Time Complexity:} Nearly $O(1)$ amortized per operation (inverse Ackermann function)
+
+\textbf{Space Complexity:} $O(V)$
+
+\textbf{Operations:}
+\begin{itemize}
+\item \texttt{init(V)}: Initialize V nodes
+\item \texttt{findRoot(node)}: Find root with path compression
+\item \texttt{unionByRank(u, v)}: Union two sets by rank
+\end{itemize}
+
+\textbf{Key Optimizations:}
+\begin{itemize}
+\item Path compression: Makes all nodes on path point directly to root
+\item Union by rank: Attach smaller tree under larger tree
+\end{itemize}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Kruskal's MST algorithm
+\item Checking connectivity
+\item Finding connected components
+\end{itemize}

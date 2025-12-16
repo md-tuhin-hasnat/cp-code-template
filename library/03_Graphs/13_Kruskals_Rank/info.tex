@@ -1,0 +1,20 @@
+Kruskal's algorithm for finding Minimum Spanning Tree (MST) using Disjoint Set Union with union by rank.
+
+\textbf{Time Complexity:} $O(E \log E)$ for sorting edges
+
+\textbf{Space Complexity:} $O(V + E)$
+
+\textbf{Algorithm:}
+\begin{itemize}
+\item Sort all edges by weight
+\item Iterate through sorted edges
+\item If edge connects two different components, add it to MST
+\item Use DSU to check connectivity and merge components
+\end{itemize}
+
+\textbf{Properties:}
+\begin{itemize}
+\item MST has exactly $V-1$ edges
+\item Works on weighted undirected graphs
+\item Greedy algorithm (always picks minimum weight edge)
+\end{itemize}

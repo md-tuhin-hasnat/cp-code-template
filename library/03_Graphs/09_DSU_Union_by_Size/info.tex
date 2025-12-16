@@ -1,0 +1,12 @@
+Disjoint Set Union (DSU) with union by size. Similar to union by rank but maintains actual sizes of trees.
+
+\textbf{Time Complexity:} Nearly $O(1)$ amortized per operation
+
+\textbf{Space Complexity:} $O(V)$
+
+\textbf{Differences from Union by Rank:}
+\begin{itemize}
+\item Maintains actual size of subtrees instead of rank
+\item Always attach smaller tree to larger tree
+\item Can query size of components directly
+\end{itemize}

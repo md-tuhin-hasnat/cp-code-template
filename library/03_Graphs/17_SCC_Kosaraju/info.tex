@@ -1,0 +1,10 @@
+Kosaraju's algorithm finds Strongly Connected Components in a directed graph.
+
+\textbf{Time Complexity:} $O(V + E)$
+
+\textbf{Algorithm:}
+\begin{itemize}
+\item DFS on original graph to get finish times
+\item DFS on reverse graph in decreasing finish time order
+\item Each DFS tree in second pass is an SCC
+\end{itemize}

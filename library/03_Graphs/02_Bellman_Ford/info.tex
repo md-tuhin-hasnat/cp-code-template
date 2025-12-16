@@ -1,0 +1,19 @@
+Bellman-Ford algorithm finds shortest paths from a source vertex to all other vertices, even with negative edge weights. Can detect negative weight cycles.
+
+\textbf{Time Complexity:} $O(VE)$
+
+\textbf{Space Complexity:} $O(V + E)$
+
+\textbf{Usage:}
+\begin{itemize}
+\item Call \texttt{init(V)} to initialize
+\item Add edges using \texttt{edgeList.push\_back(\{u, v, w\})}
+\item Call \texttt{bellmanFord(source, V)} to compute shortest paths
+\item Returns \texttt{true} if negative cycle exists, \texttt{false} otherwise
+\end{itemize}
+
+\textbf{Advantages:}
+\begin{itemize}
+\item Works with negative edge weights
+\item Detects negative cycles
+\end{itemize}

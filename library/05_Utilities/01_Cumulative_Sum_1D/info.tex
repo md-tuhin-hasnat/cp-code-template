@@ -1,0 +1,11 @@
+1D Prefix Sum (Cumulative Sum) for efficient range sum queries.
+
+\textbf{Time Complexity:}
+\begin{itemize}
+\item Build: $O(N)$
+\item Query: $O(1)$
+\end{itemize}
+
+\textbf{Space Complexity:} $O(N)$
+
+\textbf{Formula:} \texttt{rangeSum(l, r) = pre[r] - pre[l-1]}
