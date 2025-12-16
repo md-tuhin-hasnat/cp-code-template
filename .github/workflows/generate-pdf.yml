@@ -41,6 +41,7 @@ jobs:
       
       - name: Compile PDF
         run: |
+          mkdir -p output
           cp templates/main.tex .
           xelatex -shell-escape -interaction=nonstopmode -output-directory=output main.tex
           xelatex -shell-escape -interaction=nonstopmode -output-directory=output main.tex
