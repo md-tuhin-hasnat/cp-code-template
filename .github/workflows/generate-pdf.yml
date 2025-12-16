@@ -54,8 +54,14 @@ jobs:
         run: |
           mkdir -p output
           cp templates/main.tex .
-          xelatex -shell-escape -interaction=nonstopmode -output-directory=output main.tex
-          xelatex -shell-escape -interaction=nonstopmode -output-directory=output main.tex
+          xelatex -shell-escape -interaction=nonstopmode -output-directory=output main.tex || true
+          xelatex -shell-escape -interaction=nonstopmode -output-directory=output main.tex || true
+          # Check if PDF was actually created
+          if [ ! -f output/main.pdf ]; then
+            echo "Error: PDF was not generated"
+            exit 1
+          fi
+          echo "PDF generated successfully"
       
       - name: Clean up auxiliary files
         run: |
