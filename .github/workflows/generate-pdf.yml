@@ -27,6 +27,18 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
+          cache: 'pip'
+      
+      - name: Cache LaTeX packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            /usr/share/texlive
+            /usr/share/texmf
+            ~/.texlive
+          key: ${{ runner.os }}-texlive-${{ hashFiles('.github/workflows/generate-pdf.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-texlive-
       
       - name: Install LaTeX dependencies
         run: |

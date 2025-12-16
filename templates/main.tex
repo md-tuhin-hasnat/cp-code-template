@@ -18,9 +18,10 @@
 \usepackage{tikz}                     % For drawing dashed lines
 
 % ===== FONT CONFIGURATION =====
-% Text Font: Load from fonts/text-font/ with fallback
-\IfFileExists{./fonts/text-font/}{
-    % Attempt to load first .otf or .ttf file found
+% Try to load custom fonts, with robust fallbacks
+
+% Text Font: Try custom fonts, fallback to TeX Gyre Pagella
+\IfFileExists{./fonts/text-font/TeX_Gyre_Pagella-Regular.ttf}{
     \setmainfont{TeX Gyre Pagella}[
         Extension = .ttf,
         Path = ./fonts/text-font/,
@@ -30,12 +31,12 @@
         BoldItalicFont = *-BoldItalic
     ]
 }{
-    % Fallback to TeX Gyre Pagella (standard)
+    % Fallback to system TeX Gyre Pagella
     \setmainfont{TeX Gyre Pagella}
 }
 
-% Code Font: Load from fonts/code-font/ with fallback
-\IfFileExists{./fonts/code-font/}{
+% Code Font: Try custom fonts, fallback to system monospace
+\IfFileExists{./fonts/code-font/JetBrains_Mono-Regular.ttf}{
     \setmonofont{JetBrains Mono}[
         Extension = .ttf,
         Path = ./fonts/code-font/,
@@ -44,23 +45,27 @@
         ItalicFont = *-Italic
     ]
 }{
-    % Fallback to JetBrains Mono or default monospace
-    \setmonofont{JetBrains Mono}[
-        Scale=0.9,
-        ItalicFont = *-Italic
-    ]
+    % Fallback: Try DejaVu Sans Mono (common in Linux), then Liberation Mono
+    \IfFontExistsTF{DejaVu Sans Mono}{
+        \setmonofont{DejaVu Sans Mono}[Scale=0.9]
+    }{
+        \IfFontExistsTF{Liberation Mono}{
+            \setmonofont{Liberation Mono}[Scale=0.9]
+        }{
+            % Last resort: use default monospace
+            \setmonofont{Courier New}[Scale=0.9]
+        }
+    }
 }
 
-% Equation Font: Load from fonts/equation-font/ with fallback
-% Math fonts require special handling in XeLaTeX
-\IfFileExists{./fonts/equation-font/}{
-    \usepackage{unicode-math}
+% Equation Font: Always use TeX Gyre Pagella Math (standard and reliable)
+\usepackage{unicode-math}
+\IfFileExists{./fonts/equation-font/texgyrepagella-math.otf}{
     \setmathfont{TeX Gyre Pagella Math}[
         Path = ./fonts/equation-font/
     ]
 }{
-    % Fallback to default math font
-    \usepackage{unicode-math}
+    % Fallback to system TeX Gyre Pagella Math (standard in texlive)
     \setmathfont{TeX Gyre Pagella Math}
 }
 

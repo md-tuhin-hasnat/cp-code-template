@@ -41,7 +41,7 @@ project_spec.md
 PROJECT_SUMMARY.md
 
 # Fonts (user can add their own)
-fonts/
+# fonts/
 
 # User library (optional - remove this line if you want to track your library)
 # library/
