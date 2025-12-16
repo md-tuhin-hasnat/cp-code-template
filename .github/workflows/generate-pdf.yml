@@ -79,3 +79,4 @@ jobs:
           git push || echo "No changes to push"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+# This triggers the workflow
