@@ -30,6 +30,7 @@ jobs:
           python-version: '3.x'
       
       - name: Cache LaTeX packages
+        id: cache-latex
         uses: actions/cache@v4
         with:
           path: |
@@ -41,6 +42,7 @@ jobs:
             ${{ runner.os }}-texlive-
       
       - name: Install LaTeX dependencies
+        if: steps.cache-latex.outputs.cache-hit != 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y texlive-xetex texlive-latex-extra texlive-fonts-extra
@@ -53,12 +55,12 @@ jobs:
       
       - name: Compile PDF
         run: |
-          mkdir -p output
+          mkdir -p dist
           cp templates/main.tex .
-          xelatex -shell-escape -interaction=nonstopmode -output-directory=output main.tex || true
-          xelatex -shell-escape -interaction=nonstopmode -output-directory=output main.tex || true
+          xelatex -shell-escape -interaction=nonstopmode -output-directory=dist main.tex || true
+          xelatex -shell-escape -interaction=nonstopmode -output-directory=dist main.tex || true
           # Check if PDF was actually created
-          if [ ! -f output/main.pdf ]; then
+          if [ ! -f dist/main.pdf ]; then
             echo "Error: PDF was not generated"
             exit 1
           fi
@@ -67,13 +69,13 @@ jobs:
       - name: Clean up auxiliary files
         run: |
           rm -f main.aux main.log main.out main.toc main.tex
-          find output -type f ! -name '*.pdf' ! -name '*.tex' -delete 2>/dev/null || true
+          find dist -type f ! -name '*.pdf' ! -name '*.tex' -delete 2>/dev/null || true
       
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: cp-template-pdf
-          path: output/main.pdf
+          path: dist/main.pdf
           retention-days: 90
       
       - name: Commit generated PDF (optional)
@@ -81,7 +83,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add output/main.pdf templates/content.tex templates/team_info.tex 2>/dev/null || true
+          git add dist/main.pdf templates/content.tex templates/team_info.tex 2>/dev/null || true
           git diff --staged --quiet || git commit -m "🤖 Auto-generate PDF [skip ci]"
           git push || echo "No changes to push"
         env:
