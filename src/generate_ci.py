@@ -35,7 +35,7 @@ def main():
     
     # Use default team info for automated builds
     team_info_data = {
-        'title': 'ICPC Dhaka Regional 2025',
+        'title': 'ICPC Asia Dhaka Regional 2025',
         'team_name': 'BUBT_Sunday_Monday_Close',
         'members': ['Md. Tuhin Hasnat', 'Amir Hamza Miraz', 'Rakin Absar Ratul']
     }
