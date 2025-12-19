@@ -75,15 +75,41 @@
 \setsansfont{TeX Gyre Heros}
 
 % ===== BANGLA FONT CONFIGURATION =====
-% Using FreeSerif as it is widely available and supports Bangla glyphs
-\newfontfamily\bengalifont{FreeSerif}[
-    Script=Bengali,
-    Scale=0.9
-]
-\newfontfamily\bengalisansfont{FreeSans}[
-    Script=Bengali,
-    Scale=0.9
-]
+% Primary: Try local Noto Serif Bengali (bundled in fonts/bangla-font/)
+\IfFileExists{./fonts/bangla-font/NotoSerifBengali-Regular.ttf}{
+    \newfontfamily\bengalifont{NotoSerifBengali}[
+        Path = ./fonts/bangla-font/,
+        Extension = .ttf,
+        UprightFont = *-Regular,
+        BoldFont = *-Bold,
+        Script=Bengali,
+        Scale=0.9
+    ]
+}{
+    % Fallback: FreeSerif (system default)
+    \newfontfamily\bengalifont{FreeSerif}[
+        Script=Bengali,
+        Scale=0.9
+    ]
+}
+
+% Primary: Try local Noto Sans Bengali (bundled in fonts/bangla-font/)
+\IfFileExists{./fonts/bangla-font/NotoSansBengali-Regular.ttf}{
+    \newfontfamily\bengalisansfont{NotoSansBengali}[
+        Path = ./fonts/bangla-font/,
+        Extension = .ttf,
+        UprightFont = *-Regular,
+        BoldFont = *-Bold,
+        Script=Bengali,
+        Scale=0.9
+    ]
+}{
+    % Fallback: FreeSans (system default)
+    \newfontfamily\bengalisansfont{FreeSans}[
+        Script=Bengali,
+        Scale=0.9
+    ]
+}
 \newcommand{\bn}[1]{{\bengalifont #1}}
 
 % ===== COLOR SCHEME =====
