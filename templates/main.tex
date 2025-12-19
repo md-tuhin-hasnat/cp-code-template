@@ -17,6 +17,8 @@
 \usepackage{needspace}                % For keeping blocks together
 \usepackage{tikz}                     % For drawing dashed lines
 
+\usepackage{caption}                  % For captionof
+
 % ===== FONT CONFIGURATION =====
 % Try to load custom fonts, with robust fallbacks
 
@@ -71,6 +73,18 @@
 
 % Sans-serif font for headers
 \setsansfont{TeX Gyre Heros}
+
+% ===== BANGLA FONT CONFIGURATION =====
+% Using FreeSerif as it is widely available and supports Bangla glyphs
+\newfontfamily\bengalifont{FreeSerif}[
+    Script=Bengali,
+    Scale=0.9
+]
+\newfontfamily\bengalisansfont{FreeSans}[
+    Script=Bengali,
+    Scale=0.9
+]
+\newcommand{\bn}[1]{{\bengalifont #1}}
 
 % ===== COLOR SCHEME =====
 \definecolor{sectioncolor}{RGB}{30,60,140}   % Royal Blue
